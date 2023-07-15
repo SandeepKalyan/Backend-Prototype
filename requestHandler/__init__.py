@@ -5,6 +5,31 @@ from http.server import BaseHTTPRequestHandler
 class RequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        print(self.path)
+        print(self.client_address)
+
+        if self.path == '/':
+            print(self.path)
+        elif self.path == '/logout':
+            print(self.path)
+        elif self.path == '/users':
+            print(self.path)
+
+
+        elif self.path == '/viewcart':
+            print(self.path)
+        elif self.path == '/buycart':
+            print(self.path)
+        elif self.path == '/orders':
+            print(self.path)
+
+        #
+        elif self.path == '/home':
+            print(self.path)
+
+        else:
+            print(self.path)
+
         # Set the response status code
         self.send_response(200)
 
@@ -18,7 +43,15 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(response.encode())
 
     def do_POST(self):
-        print(self.path)
-        self.send_header("header:", "Version-1")
-        self.send_response(200, "Response body")
-        self.end_headers()
+        if self.path == '/':
+            print(self.path)
+        elif self.path == '/register':
+            print(self.path)
+        elif self.path == '/login':
+            print(self.path)
+        elif self.path == '/cartload':
+            print(self.path)
+        elif self.path == '/removefromcart':
+            print(self.path)
+        elif self.path == '/buynow':
+            print(self.path)
