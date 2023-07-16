@@ -1,4 +1,3 @@
-import json
 from http.server import BaseHTTPRequestHandler
 
 
@@ -8,6 +7,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         print(self.path)
         print(self.client_address)
 
+        # Home & User APIs
         if self.path == '/':
             print(self.path)
         elif self.path == '/logout':
@@ -15,7 +15,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         elif self.path == '/users':
             print(self.path)
 
-
+        # Cart APIs
         elif self.path == '/viewcart':
             print(self.path)
         elif self.path == '/buycart':

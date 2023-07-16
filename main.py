@@ -1,7 +1,6 @@
-import http
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import requestHandler
-
+import models
 
 def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
     server_address = ('', 8080)
@@ -11,4 +10,5 @@ def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     # MyRequestHandler = requestHandler.RequestHandler
+    models.initiate_mongo()
     run(HTTPServer, requestHandler.RequestHandler)
