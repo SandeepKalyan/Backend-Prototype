@@ -1,7 +1,13 @@
+import json
 from http.server import BaseHTTPRequestHandler
+
+from controllers import users
 
 
 class RequestHandler(BaseHTTPRequestHandler):
+
+    response_code=0
+    response_body=""
 
     def do_GET(self):
         print(self.path)
@@ -46,7 +52,9 @@ class RequestHandler(BaseHTTPRequestHandler):
         if self.path == '/':
             print(self.path)
         elif self.path == '/register':
-            print(self.path)
+            response = users.register(self.rfile.read(int(self.headers["Content-length"])))
+            self.response_code = response[1]
+            self.response_body = response[0]
         elif self.path == '/login':
             print(self.path)
         elif self.path == '/cartload':
@@ -55,3 +63,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             print(self.path)
         elif self.path == '/buynow':
             print(self.path)
+
+        self.send_response(self.response_code)
+
+        # Set the response headers
+        self.send_header('Content-type', 'Initiation')
+
+        self.end_headers()
+
+        # Set the response content
+        if "error" in self.response_body.keys():
+            self.send_error(self.response_code,self.response_body.get('error'))
+        else:
+            self.wfile.write(self.response_body.get("message").encode())

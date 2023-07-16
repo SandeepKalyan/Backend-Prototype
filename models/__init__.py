@@ -1,14 +1,6 @@
 from pymongo import MongoClient
 
-
-def initiate_mongo():
-    client = MongoClient('mongodb://localhost:27017')
-
-    db = client['backend-database']
-
-    user_collection = db['users']
-    user_schema = {
-        'userID': int,
+user_schema = {
         'cartID': int,
         'username': str,
         'password': str,
@@ -19,8 +11,7 @@ def initiate_mongo():
         'phone-no': int
     }
 
-    products_collection = db['products']
-    products_schema = {
+products_schema = {
         'productID': int,
         'categoryID': int,
         'productName': str,
@@ -32,19 +23,30 @@ def initiate_mongo():
         }
     }
 
-    category_collection = db['category']
-    category_schema = {
-        'categoryID': int,
-        'products': [products_schema],
-    }
-
-    orders_collection = db['orders']
-    orders_schema = {
+orders_schema = {
         'orderID': int,
         'userID': int,
         'cartID': int,
         'products': [products_schema],
 
     }
+
+category_schema = {
+        'categoryID': int,
+        'products': [products_schema],
+    }
+
+def initiate_mongo():
+    client = MongoClient('mongodb://localhost:27017')
+
+    db = client['backend-database']
+
+    user_collection = db['users']
+
+    products_collection = db['products']
+
+    category_collection = db['category']
+
+    orders_collection = db['orders']
 
     client.close()
