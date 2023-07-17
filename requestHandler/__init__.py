@@ -56,7 +56,9 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.response_code = response[1]
             self.response_body = response[0]
         elif self.path == '/login':
-            print(self.path)
+            response = users.login(self.rfile.read(int(self.headers["Content-length"])))
+            self.response_code = response[1]
+            self.response_body = response[0]
         elif self.path == '/cartload':
             print(self.path)
         elif self.path == '/removefromcart':
